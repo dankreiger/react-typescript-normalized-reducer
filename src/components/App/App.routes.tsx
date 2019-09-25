@@ -16,7 +16,7 @@ const AppRoutes = (): any => {
     from: {
       opacity: 0,
       width: "100%",
-      transform: "translate3d(100%, 0, 0) scale(0.3)"
+      transform: "translate3d(100%, 0, 0) scale(0)"
     },
     enter: {
       opacity: 1,
@@ -25,9 +25,14 @@ const AppRoutes = (): any => {
     },
     leave: {
       opacity: 0,
-      transform: "translate3d(-50%,0,0) scale(0.3)"
+      transform: "translate3d(-50%,0,0) scale(0)"
     },
-    config: { duration: ROUTER_ANIMATION_DURATION }
+    config: {
+      duration: ROUTER_ANIMATION_DURATION,
+      mass: 1,
+      tension: 280,
+      friction: 120
+    }
   });
   return transitions.map(({ item, props: transition, key }: any) => (
     <AppRoutesContainer key={key} style={transition}>

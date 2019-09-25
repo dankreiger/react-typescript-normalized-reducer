@@ -20,14 +20,13 @@ const TodoList: FC<ITodoListProps> = ({ todos, visible }) => {
     toggle(visible);
   }, [visible]);
 
-  const trail = useTrail(5, {
+  const trail = useTrail(todos && todos.length, {
     opacity: on ? 1 : 0,
 
     transform: on ? "scale(1)" : "scale(0)",
     config: {
       duration: DEFAULT_ANIMATION_DURATION,
       mass: 1,
-      tension: 280,
       friction: 120
     }
   });
