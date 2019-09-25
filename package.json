@@ -2,24 +2,23 @@
   "name": "todo-puppy",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.5",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.2",
-    "typescript": "3.6.3"
-  },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sort": "yarn run sort-package-json",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "browserslist": {
     "production": [
@@ -32,5 +31,51 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "connected-react-router": "6.5.2",
+    "lodash.throttle": "4.1.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "7.1.1",
+    "react-router-dom": "5.1.0",
+    "react-scripts": "3.1.2",
+    "react-spring": "8.0.27",
+    "redux": "4.0.4",
+    "redux-saga": "1.1.1",
+    "reselect": "4.0.0",
+    "styled-components": "4.4.0",
+    "typescript": "3.6.3",
+    "uuid": "3.3.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "4.1.0",
+    "@testing-library/react": "9.1.4",
+    "@types/deep-freeze": "0.1.2",
+    "@types/enzyme": "3.10.3",
+    "@types/enzyme-adapter-react-16": "1.0.5",
+    "@types/jest": "24.0.18",
+    "@types/lodash.throttle": "4.1.6",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "@types/react-redux": "7.1.2",
+    "@types/react-router-dom": "4.3.5",
+    "@types/redux-immutable-state-invariant": "2.1.1",
+    "@types/redux-mock-store": "1.0.1",
+    "@types/styled-components": "4.1.19",
+    "@types/uuid": "3.4.5",
+    "deep-freeze": "0.0.1",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
+    "husky": "3.0.5",
+    "lint-staged": "9.3.0",
+    "prettier": "1.18.2",
+    "redux-devtools-extension": "2.13.8",
+    "redux-immutable-state-invariant": "2.1.0",
+    "redux-mock-store": "1.5.3",
+    "sort-package-json": "1.22.1"
   }
 }
