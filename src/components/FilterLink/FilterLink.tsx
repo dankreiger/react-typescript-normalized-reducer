@@ -30,8 +30,9 @@ const FilterLink: FC<IFilterLinkProps> = ({
   };
   return (
     <FilterLinkContainer
-      className={clicked ? `${className} red` : className}
+      className={activeRoute === filter ? `${className} red` : className}
       onClick={handleFilterClick}
+      style={{ backgroundColor: clicked ? "#9c27b0" : "#26a69a" }}
     >
       {children}
     </FilterLinkContainer>
