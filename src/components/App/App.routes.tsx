@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Route } from "react-router-dom";
 import { useTransition } from "react-spring";
 import { __RouterContext } from "react-router";
-import Main from "../Main/Main";
 import { AppRoutesContainer, getBgColor } from "./App.styles";
 import { ROUTER_ANIMATION_DURATION } from "../../utils/style-utils";
+import TodoList from "../TodoList/TodoList";
 
 function useRouter() {
   return useContext(__RouterContext);
@@ -36,7 +36,7 @@ const AppRoutes = (): any => {
   });
   return transitions.map(({ item, props: transition, key }: any) => (
     <AppRoutesContainer key={key} style={transition}>
-      <Route exact path="/:filter?" component={Main} />
+      <Route exact path="/:filter?" component={TodoList} />
     </AppRoutesContainer>
   ));
 };

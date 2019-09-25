@@ -17,7 +17,7 @@ const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
   };
   return (
     <TodoFormContainer>
-      <div className="input-field">
+      <div className="input-field" style={{ zIndex: 1 }}>
         <input
           data-testid="input"
           onChange={e => setInputValue(e.target.value)}

@@ -8,7 +8,7 @@ export const getBgColor = (filter: FilterLinkPath) => {
     case EFilterPath.ACTIVE:
       return "#f5f5f5";
     case EFilterPath.COMPLETED:
-      return "#90caf9";
+      return "#aaa";
     default:
       return "inherit";
   }
@@ -21,7 +21,7 @@ export const AppRoutesContainer = styled(animated.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  top: 0;
+  padding-top: 100px;
   will-change: transform, opacity;
 `;

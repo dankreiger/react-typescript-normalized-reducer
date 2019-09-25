@@ -31,6 +31,8 @@ const TodoList: FC<ITodoListProps> = ({ todos, visible }) => {
     }
   });
 
+  if (todos.length === 0) return <h1>none here</h1>;
+
   return (
     <TodoListContainer>
       {trail.map((animation, i) => (
