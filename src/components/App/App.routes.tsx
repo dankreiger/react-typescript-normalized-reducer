@@ -34,6 +34,8 @@ const AppRoutes = (): any => {
       friction: 120
     }
   });
+
+  // TODO: this probably works better for transitions: https://github.com/dankreiger/react-spring-examples/blob/master/src/Routes.js
   return transitions.map(({ item, props: transition, key }: any) => (
     <AppRoutesContainer key={key} style={transition}>
       <Route exact path="/:filter?" component={TodoList} />

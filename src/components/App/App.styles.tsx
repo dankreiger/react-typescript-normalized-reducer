@@ -23,5 +23,5 @@ export const AppRoutesContainer = styled(animated.div)`
   flex-direction: column;
   top: 0;
   padding-top: 100px;
-  will-change: transform, opacity;
+  will-change: transform, opacity, background-color;
 `;
