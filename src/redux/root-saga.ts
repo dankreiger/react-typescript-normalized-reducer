@@ -1,5 +1,5 @@
 import { all, takeEvery, call, select } from "redux-saga/effects";
-import { watchRouteChange } from "./todos/todos.sagas";
+import { watchFetchTodosBegin, watchRouteChange } from "./todos/todos.sagas";
 
 export function* watchAndLog() {
   yield takeEvery("*", function* logger(action) {
@@ -11,5 +11,5 @@ export function* watchAndLog() {
 }
 
 export default function* rootSaga() {
-  yield all([call(watchRouteChange)]);
+  yield all([call(watchRouteChange), call(watchFetchTodosBegin)]);
 }

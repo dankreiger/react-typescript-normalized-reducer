@@ -1,38 +1,33 @@
 import {
-  IAddTodoAction,
-  IHideTodosAction,
-  IToggleTodoAction,
-  IShowTodosAction,
-  ETodosActionTypes,
-  TodoText,
-  TodoId
+  ETodosActionTypes as TodoActionType,
+  ITodosAction,
+  ITodosSuccessPayload,
+  ITodosResponseAction
 } from "./";
-import uuidv1 from "uuid/v1";
-import { IHandleTodosFilterAction } from "./todos.interface";
-import { FilterLinkPath } from "../../components/FilterLink/FilterLink.type";
+import { AnyAction } from "redux";
+import { Filter } from "components/FilterLink";
 
-export const addTodo = (text: TodoText): IAddTodoAction => ({
-  type: ETodosActionTypes.addTodo,
-  text,
-  id: uuidv1()
+export const fetchTodosBegin = (): AnyAction => ({
+  type: TodoActionType.fetchTodosBegin
 });
 
-export const toggleTodo = (id: TodoId): IToggleTodoAction => ({
-  type: ETodosActionTypes.toggleTodo,
-  id
+export const showTodos = (): AnyAction => ({
+  type: TodoActionType.showTodos
 });
 
-export const hideTodos = (): IHideTodosAction => ({
-  type: ETodosActionTypes.hideTodos
+export const hideTodos = (): AnyAction => ({
+  type: TodoActionType.hideTodos
 });
 
-export const showTodos = (): IShowTodosAction => ({
-  type: ETodosActionTypes.showTodos
+export const fetchTodosSuccess = (
+  payload: ITodosSuccessPayload
+): ITodosResponseAction => ({
+  type: TodoActionType.fetchTodosSuccess,
+  response: payload.response,
+  filter: payload.filter
 });
 
-export const handleTodosFilter = (
-  filter: FilterLinkPath
-): IHandleTodosFilterAction => ({
-  type: ETodosActionTypes.handleTodosFilter,
-  path: filter
+export const handleTodosFilter = (filter: Filter): ITodosAction => ({
+  type: TodoActionType.handleTodosFilter,
+  filter
 });

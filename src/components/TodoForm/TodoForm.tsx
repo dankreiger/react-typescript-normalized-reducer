@@ -1,13 +1,12 @@
 import React, { FC, useState } from "react";
 import { connect } from "react-redux";
-import { ITodoFormProps } from "./TodoForm.interface";
-import { addTodo } from "./../../redux/todos/";
+import { ITodoFormProps } from "./types/TodoForm.interface";
 import { TodoFormContainer } from "./TodoForm.styles";
 
-const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
+const TodoForm: FC<ITodoFormProps> = () => {
   const [inputValue, setInputValue] = useState("");
   const handleAddTodo = () => {
-    addTodo(inputValue);
+    // addTodo(inputValue);
     setInputValue("");
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -34,5 +33,5 @@ const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
 
 export default connect(
   null,
-  { addTodo }
+  null
 )(TodoForm as FC);

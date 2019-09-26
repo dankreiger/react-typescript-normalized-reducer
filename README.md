@@ -9,3 +9,6 @@
 
 - update tests
 - abstract the todos dictionary logic in a neater way
+- create `WithSpinner` hoc for async loading components
+- apply error boundaries
+- get a faster computer one day because typescript compiler is heavy

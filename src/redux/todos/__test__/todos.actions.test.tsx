@@ -1,5 +1,5 @@
 import { addTodo, toggleTodo } from "../todos.actions";
-import { ETodosActionTypes } from "../todos.enum";
+import { ETodosActionTypes } from "../types/todos.enum";
 import uuidv1 from "uuid/v1";
 
 describe("todos actions", () => {
