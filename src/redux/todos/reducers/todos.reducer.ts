@@ -2,7 +2,7 @@ import { ITodosState, ITodosListByFilterState } from "..";
 import { combineReducers } from "redux";
 import { EFilter, Filter } from "../../../components/FilterLink";
 import byId, * as fromById from "./byId.reducer";
-import visible, * as fromVisible from "./visible.reducer";
+import visible from "./visible.reducer";
 import createList, * as fromList from "./createList.reducer";
 
 const listByFilter = combineReducers<ITodosListByFilterState>({

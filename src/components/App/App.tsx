@@ -9,7 +9,7 @@ export const App: FC = (): JSX.Element => {
     <>
       <TodoForm />
       <TodoFilters />
-
+      <p>Try a different animation spring, this one is slow - but not now</p>
       <Route exact path="/:filter?" component={TodoList} />
     </>
   );
