@@ -2,16 +2,18 @@ import React, { FC, useState } from "react";
 import { connect } from "react-redux";
 import { ITodoFormProps } from "./types/TodoForm.interface";
 import { TodoFormContainer } from "./TodoForm.styles";
+import { fetchTodosBegin } from "redux/todos";
 import { addTodo } from "api";
 import { ITodo } from "redux/todos";
 const uuidv1 = require("uuid/v1");
 
-const TodoForm: FC<ITodoFormProps> = () => {
+const TodoForm: FC<ITodoFormProps> = ({ fetchTodosBegin }) => {
   const [inputValue, setInputValue] = useState("");
-  // testing json server - will move to redux saga
+  // testing json server - will move to redux saga and maybe use socket.io later
   const handleAddTodo = async () => {
     const todo: ITodo = { id: uuidv1(), text: inputValue, completed: false };
     await addTodo(todo);
+    fetchTodosBegin();
     setInputValue("");
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -40,5 +42,5 @@ const TodoForm: FC<ITodoFormProps> = () => {
 
 export default connect(
   null,
-  null
+  { fetchTodosBegin }
 )(TodoForm as FC);
