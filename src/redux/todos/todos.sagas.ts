@@ -3,12 +3,12 @@ import { push } from "connected-react-router";
 
 import { fetchTodosSuccess, hideTodos, showTodos } from "./";
 import { ETodosActionTypes as TodoActionType } from "./types/todos.enum";
-import { ITodosAction } from "./types/todos.interface";
+import { ITodosAction, ITodo } from "./types/todos.interface";
 
-import { Filter } from "components/FilterLink";
+import { Filter, EFilter } from "components/FilterLink";
 import { ROUTER_ANIMATION_DURATION } from "utils/style-utils";
 import { selectTodoFilter } from "./todos.selectors";
-import { fetchTodos } from "api";
+import { abortableFetch, apiUrl } from "api";
 
 export function* handleRouteChangeAsync(action: ITodosAction) {
   yield put(hideTodos());
@@ -20,7 +20,23 @@ export function* handleRouteChangeAsync(action: ITodosAction) {
 
 export function* handleFetchTodosBeginAsync() {
   const filter: Filter = yield select(selectTodoFilter);
-  const todos = yield fetchTodos(filter);
+  const response = yield abortableFetch(apiUrl);
+  const data: ITodo[] = yield response.json();
+  let todos: ITodo[];
+  switch (filter) {
+    case EFilter.ALL:
+      yield (todos = data);
+      break;
+    case EFilter.ACTIVE:
+      yield (todos = data.filter(t => !t.completed));
+      break;
+    case EFilter.COMPLETED:
+      yield (todos = data.filter(t => t.completed));
+      break;
+    default:
+      yield (todos = data);
+      break;
+  }
   yield put(fetchTodosSuccess({ response: todos, filter }));
 }
 

@@ -10,6 +10,7 @@
     "generate-data": "json-server --port 4000 generate.js",
     "refresh-data": "cp db-*.json db.json && rm db-*.json",
     "server": "json-server --watch db.json --port 4000",
+    "start": "yarn run client",
     "sort": "yarn run sort-package-json",
     "test": "react-scripts test"
   },
