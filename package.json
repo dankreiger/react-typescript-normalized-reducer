@@ -8,6 +8,7 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "eject": "react-scripts eject",
     "generate-data": "json-server --port 4000 generate.js",
+    "refresh-data": "cp db-*.json db.json && rm db-*.json",
     "server": "json-server --watch db.json --port 4000",
     "sort": "yarn run sort-package-json",
     "test": "react-scripts test"
