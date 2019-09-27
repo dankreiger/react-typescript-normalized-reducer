@@ -6,6 +6,7 @@
 .pnp.js
 
 *.private.json
+db-*.json
 # testing
 /coverage
 
