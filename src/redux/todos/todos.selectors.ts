@@ -25,7 +25,7 @@ export const selectTodoFilter = createSelector(
 export const selectVisibleTodos = createSelector(
   [selectTodosReducer, selectTodoFilter],
   (state: ITodosState, filter: Filter) => {
-    const ids = state.idsByFilter[filter];
+    const ids = state.listByFilter[filter];
     return ids.map(id => state.byId[id]);
   }
 );

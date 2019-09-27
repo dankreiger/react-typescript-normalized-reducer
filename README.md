@@ -12,3 +12,4 @@
 - create `WithSpinner` hoc for async loading components
 - apply error boundaries
 - get a faster computer one day because typescript compiler is heavy
+- make ajax abortable (can be easily done via `switchmap` in rxjs i.e. `redux-observable`, but find a saga solution for this example)

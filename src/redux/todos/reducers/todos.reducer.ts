@@ -1,11 +1,11 @@
-import { ITodosState, ITodosIdsByFilterState } from "..";
+import { ITodosState, ITodosListByFilterState } from "..";
 import { combineReducers } from "redux";
-import { EFilter } from "../../../components/FilterLink";
+import { EFilter, Filter } from "../../../components/FilterLink";
 import byId, * as fromById from "./byId.reducer";
 import visible, * as fromVisible from "./visible.reducer";
 import createList, * as fromList from "./createList.reducer";
 
-const idsByFilter = combineReducers<ITodosIdsByFilterState>({
+const listByFilter = combineReducers<ITodosListByFilterState>({
   all: createList(EFilter.ALL),
   active: createList(EFilter.ACTIVE),
   completed: createList(EFilter.COMPLETED)
@@ -13,6 +13,11 @@ const idsByFilter = combineReducers<ITodosIdsByFilterState>({
 
 export const todos = combineReducers<ITodosState>({
   byId,
-  idsByFilter,
+  listByFilter,
   visible
 });
+
+export const getVisibleTodos = (state: ITodosState, filter: Filter) => {
+  const ids = fromList.getIds(state.listByFilter[filter]);
+  return ids.map(id => fromById.getTodo(state.byId, id));
+};

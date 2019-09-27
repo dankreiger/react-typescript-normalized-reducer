@@ -5,11 +5,11 @@ import { ETodosActionTypes } from "./todos.enum";
 // experimenting with non-nested data
 export interface ITodosState {
   byId: ITodoDictionary;
-  idsByFilter: ITodosIdsByFilterState;
+  listByFilter: ITodosListByFilterState;
   visible: boolean;
 }
 
-export interface ITodosIdsByFilterState {
+export interface ITodosListByFilterState {
   [Filter: string]: TodoId[];
 }
 
