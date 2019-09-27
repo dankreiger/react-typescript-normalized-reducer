@@ -10,7 +10,12 @@ export interface ITodosState {
 }
 
 export interface ITodosListByFilterState {
-  [Filter: string]: TodoId[];
+  [Filter: string]: ITodosIdList;
+}
+
+export interface ITodosIdList {
+  ids: TodoId[];
+  isFetching: boolean;
 }
 
 export interface ITodo {

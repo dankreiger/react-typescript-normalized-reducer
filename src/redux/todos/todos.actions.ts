@@ -7,16 +7,17 @@ import {
 import { AnyAction } from "redux";
 import { Filter } from "components/FilterLink";
 
-export const fetchTodosBegin = (): AnyAction => ({
-  type: TodoActionType.fetchTodosBegin
-});
-
 export const showTodos = (): AnyAction => ({
   type: TodoActionType.showTodos
 });
 
 export const hideTodos = (): AnyAction => ({
   type: TodoActionType.hideTodos
+});
+
+export const fetchTodosBegin = (filter: Filter): ITodosAction => ({
+  type: TodoActionType.fetchTodosBegin,
+  filter
 });
 
 export const fetchTodosSuccess = (

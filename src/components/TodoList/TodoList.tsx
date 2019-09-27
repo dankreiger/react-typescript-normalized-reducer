@@ -4,27 +4,40 @@ import { animated, useTrail } from "react-spring";
 import {
   selectTodosVisible,
   selectVisibleTodos,
-  ITodo,
   selectTodoFilter,
-  fetchTodosBegin
+  fetchTodosBegin,
+  selectIsFetching
 } from "redux/todos";
 import Todo from "../Todo/Todo";
-import { ITodoListProps } from "./types/TodoList.interface";
+import {
+  ITodoListProps,
+  ITodoListConnectProps
+} from "./types/TodoList.interface";
 import { IRootReducerState } from "redux/root-reducer";
 import { TodoListContainer } from "./TodoList.styles";
 import { createStructuredSelector } from "reselect";
 import { DEFAULT_ANIMATION_DURATION } from "utils/style-utils";
-import { Filter } from "../FilterLink/types/FilterLink.type";
 import Spinner from "components/Spinner/Spinner";
 
-const TodoList: FC<ITodoListProps> = ({ visible, todos, fetchTodosBegin }) => {
+const TodoList: FC<ITodoListProps> = ({
+  visible,
+  isFetching,
+  todos,
+  filter,
+  fetchTodosBegin
+}) => {
   const [on, toggle] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (!todos.length) {
-      fetchTodosBegin();
+    if (!isFetching && !todos.length) {
+      fetchTodosBegin(filter);
+      setLoading(true);
     }
-  }, [fetchTodosBegin, todos]);
+  }, [fetchTodosBegin, filter, todos]);
 
+  useEffect(() => {
+    setLoading(!todos.length);
+  }, [todos]);
   useEffect(() => {
     toggle(visible);
   }, [visible]);
@@ -40,9 +53,8 @@ const TodoList: FC<ITodoListProps> = ({ visible, todos, fetchTodosBegin }) => {
       friction: 120
     }
   });
-
   // computer is slow, but make this a HOC e.g. `WithSpinner`
-  if (todos.length === 0) return <Spinner />;
+  if (loading) return <Spinner />;
   return (
     <TodoListContainer>
       {trail.map((animation, i) => (
@@ -54,18 +66,16 @@ const TodoList: FC<ITodoListProps> = ({ visible, todos, fetchTodosBegin }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector<
-  IRootReducerState,
-  {
-    todos: ITodo[];
-    visible: boolean;
-    filter: Filter;
-  }
->({
+const connectProps = {
   todos: selectVisibleTodos,
   visible: selectTodosVisible,
-  filter: selectTodoFilter
-});
+  filter: selectTodoFilter,
+  isFetching: selectIsFetching
+};
+const mapStateToProps = createStructuredSelector<
+  IRootReducerState,
+  ITodoListConnectProps
+>(connectProps);
 
 export default connect(
   mapStateToProps,

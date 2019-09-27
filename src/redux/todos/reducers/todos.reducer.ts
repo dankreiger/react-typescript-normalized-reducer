@@ -1,9 +1,9 @@
 import { ITodosState, ITodosListByFilterState } from "..";
 import { combineReducers } from "redux";
-import { EFilter, Filter } from "../../../components/FilterLink";
-import byId, * as fromById from "./byId.reducer";
+import { EFilter } from "../../../components/FilterLink";
+import byId from "./byId.reducer";
 import visible from "./visible.reducer";
-import createList, * as fromList from "./createList.reducer";
+import createList from "./createList.reducer";
 
 const listByFilter = combineReducers<ITodosListByFilterState>({
   all: createList(EFilter.ALL),
@@ -16,8 +16,3 @@ export const todos = combineReducers<ITodosState>({
   listByFilter,
   visible
 });
-
-export const getVisibleTodos = (state: ITodosState, filter: Filter) => {
-  const ids = fromList.getIds(state.listByFilter[filter]);
-  return ids.map(id => fromById.getTodo(state.byId, id));
-};

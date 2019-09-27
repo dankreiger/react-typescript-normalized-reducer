@@ -16,7 +16,6 @@ export const abortableFetch = (url: string, opts?: any) => {
   const controller = new AbortController();
   const signal = controller.signal;
   // I guess this is nicer with redux observable
-  // works as expected, but adds an extra cancel to the network tab for some reason
   const promise: any = fetch(url, {
     ...opts,
     signal
