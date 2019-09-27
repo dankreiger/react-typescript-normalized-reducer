@@ -4,7 +4,7 @@ const uuidv1 = require('uuid/v1');
 
 module.exports = function() {
   return {
-    todos: times(100, function() {
+    todos: times(30, function() {
       return {
         id: uuidv1(),
         text: faker.lorem.words(),

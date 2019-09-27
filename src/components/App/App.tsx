@@ -1,15 +1,16 @@
 import React, { FC } from "react";
-
+import { Route } from "react-router-dom";
 import TodoFilters from "../TodoFilters/TodoFilters";
-import AppRoutes from "./App.routes";
 import TodoForm from "../TodoForm/TodoForm";
+import TodoList from "components/TodoList/TodoList";
 
 export const App: FC = (): JSX.Element => {
   return (
     <>
       <TodoForm />
-      <AppRoutes />
       <TodoFilters />
+
+      <Route exact path="/:filter?" component={TodoList} />
     </>
   );
 };

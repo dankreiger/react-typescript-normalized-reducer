@@ -1,13 +1,19 @@
 import React, { FC, useState } from "react";
 import { connect } from "react-redux";
-import { ITodoFormProps } from "./TodoForm.interface";
-import { addTodo } from "./../../redux/todos/";
+import { ITodoFormProps } from "./types/TodoForm.interface";
 import { TodoFormContainer } from "./TodoForm.styles";
+import { fetchTodosBegin } from "redux/todos";
+import { addTodo } from "api";
+import { ITodo } from "redux/todos";
+const uuidv1 = require("uuid/v1");
 
-const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
+const TodoForm: FC<ITodoFormProps> = ({ fetchTodosBegin }) => {
   const [inputValue, setInputValue] = useState("");
-  const handleAddTodo = () => {
-    addTodo(inputValue);
+  // testing json server - will move to redux saga and maybe use socket.io later
+  const handleAddTodo = async () => {
+    const todo: ITodo = { id: uuidv1(), text: inputValue, completed: false };
+    await addTodo(todo);
+    fetchTodosBegin();
     setInputValue("");
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -17,11 +23,13 @@ const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
   };
   return (
     <TodoFormContainer>
-      <div className="input-field" style={{ zIndex: 1 }}>
+      <div className="input-field" style={{ zIndex: 1, width: "80%" }}>
         <input
           data-testid="input"
+          style={{ width: "100%" }}
           onChange={e => setInputValue(e.target.value)}
           value={inputValue}
+          placeholder="Todo: finish this again - try using websockets: https://blogs.sap.com/2019/02/25/ui5-web-components-react-redux-socket.io/"
           onKeyDown={handleKeyDown}
         />
       </div>
@@ -34,5 +42,5 @@ const TodoForm: FC<ITodoFormProps> = ({ addTodo }) => {
 
 export default connect(
   null,
-  { addTodo }
+  { fetchTodosBegin }
 )(TodoForm as FC);

@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
+import { connectRouter, RouterState } from "connected-react-router";
 
-import { ITodosReducerState, todosReducer } from "./todos/";
+import { ITodosState, todos } from "./todos/";
 /** TODO: strong type router */
 export interface IRootReducerState {
-  router: any;
-  todosReducer: ITodosReducerState;
+  router: RouterState;
+  todos: ITodosState;
 }
 
 const rootReducer = (history: any) =>
   combineReducers<IRootReducerState>({
     router: connectRouter(history),
-    todosReducer
+    todos
   });
 
 export default rootReducer;

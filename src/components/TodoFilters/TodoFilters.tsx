@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import FilterLink from "../FilterLink/FilterLink";
 import { TodoFiltersContainer } from "./TodoFilters.styles";
-import { EFilterPath } from "../FilterLink/FilterLink.enum";
+import { EFilter } from "components/FilterLink/";
+import FilterLink from "components/FilterLink/FilterLink";
 const TodoFilters: FC = () => (
   <TodoFiltersContainer>
-    <FilterLink filter={EFilterPath.ALL}>All</FilterLink>
-    <FilterLink filter={EFilterPath.ACTIVE}>Active</FilterLink>
-    <FilterLink filter={EFilterPath.COMPLETED}>Completed</FilterLink>
+    <FilterLink filter={EFilter.ALL}>All</FilterLink>
+    <FilterLink filter={EFilter.ACTIVE}>Active</FilterLink>
+    <FilterLink filter={EFilter.COMPLETED}>Completed</FilterLink>
   </TodoFiltersContainer>
 );
 

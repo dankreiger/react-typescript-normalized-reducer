@@ -1,28 +1,25 @@
 import React, { FC, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { IFilterLinkProps } from "./FilterLink.interface";
-import { FilterLinkContainer } from "./FilterLink.styled";
-import { handleTodosFilter, selectRouterPathname } from "../../redux/todos";
-import { createStructuredSelector } from "reselect";
-import { IRootReducerState } from "../../redux/root-reducer";
-import { FilterLinkPath } from "./FilterLink.type";
+import { IRootReducerState } from "redux/root-reducer";
+import { Filter, IFilterLinkProps, FilterLinkContainer } from ".";
+import { handleTodosFilter } from "redux/todos/todos.actions"; // something is wrong with absolue imports in index.ts
+import { selectTodoFilter } from "redux/todos/todos.selectors"; // something is wrong with absolue imports in index.ts
 
 const FilterLink: FC<IFilterLinkProps> = ({
   filter,
-  handleTodosFilter,
   children,
-  activeRoute
+  activeFilter,
+  handleTodosFilter
 }) => {
   const [clicked, setClicked] = useState(false);
   const className = "waves-effect waves-light btn";
-
   useEffect(() => {
-    if (activeRoute !== filter) {
+    if (activeFilter !== filter) {
       setClicked(false);
     } else {
       setClicked(true);
     }
-  }, [activeRoute, filter]);
+  }, [activeFilter, filter]);
 
   const handleFilterClick = () => {
     setClicked(true);
@@ -30,7 +27,7 @@ const FilterLink: FC<IFilterLinkProps> = ({
   };
   return (
     <FilterLinkContainer
-      className={activeRoute === filter ? `${className} red` : className}
+      className={activeFilter === filter ? `${className} red` : className}
       onClick={handleFilterClick}
       style={{ backgroundColor: clicked ? "#9c27b0" : "#26a69a" }}
     >
@@ -39,14 +36,14 @@ const FilterLink: FC<IFilterLinkProps> = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector<
-  IRootReducerState,
-  { activeRoute: FilterLinkPath }
->({
-  activeRoute: selectRouterPathname
+const mapStateToProps = (state: IRootReducerState) => ({
+  activeFilter: selectTodoFilter(state)
 });
 
+interface IOwnProps {
+  filter: Filter;
+}
 export default connect(
   mapStateToProps,
   { handleTodosFilter }
-)(FilterLink);
+)(FilterLink as FC<IOwnProps>);

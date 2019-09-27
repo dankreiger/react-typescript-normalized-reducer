@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze";
 import {
-  todosReducer,
+  todos,
   todosReducerInitialState,
   addTodo,
   toggleTodo,
@@ -25,7 +25,7 @@ describe("todos reducer", () => {
 
     deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(todosReducer(stateBefore, action)).toEqual(stateAfter);
+    expect(todos(stateBefore, action)).toEqual(stateAfter);
   });
 
   test("toggleTodo", () => {
@@ -43,6 +43,6 @@ describe("todos reducer", () => {
 
     deepFreeze(stateBefore);
     deepFreeze(action);
-    expect(todosReducer(stateBefore, action)).toEqual(stateAfter);
+    expect(todos(stateBefore, action)).toEqual(stateAfter);
   });
 });
