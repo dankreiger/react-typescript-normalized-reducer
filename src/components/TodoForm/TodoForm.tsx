@@ -2,23 +2,19 @@ import React, { FC, useState } from "react";
 import { connect } from "react-redux";
 import { ITodoFormProps } from "./types/TodoForm.interface";
 import { TodoFormContainer } from "./TodoForm.styles";
-import { fetchTodosBegin } from "redux/todos";
-import { addTodo } from "api";
-import { ITodo } from "redux/todos";
-const uuidv1 = require("uuid/v1");
+import { addTodoBegin } from "redux/todos";
+import { BUTTON_CLASS } from "utils/style-utils";
 
-const TodoForm: FC<ITodoFormProps> = ({ fetchTodosBegin }) => {
+const TodoForm: FC<ITodoFormProps> = ({ addTodoBegin }) => {
   const [inputValue, setInputValue] = useState("");
   // testing json server - will move to redux saga and maybe use socket.io later
-  const handleAddTodo = async () => {
-    const todo: ITodo = { id: uuidv1(), text: inputValue, completed: false };
-    await addTodo(todo);
-    fetchTodosBegin();
+  const handleAddTodoBegin = async () => {
+    addTodoBegin(inputValue);
     setInputValue("");
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter") {
-      handleAddTodo();
+      handleAddTodoBegin();
     }
   };
   return (
@@ -33,7 +29,7 @@ const TodoForm: FC<ITodoFormProps> = ({ fetchTodosBegin }) => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <button className="waves-effect waves-light btn" onClick={handleAddTodo}>
+      <button className={BUTTON_CLASS} onClick={handleAddTodoBegin}>
         Add Todo
       </button>
     </TodoFormContainer>
@@ -42,5 +38,5 @@ const TodoForm: FC<ITodoFormProps> = ({ fetchTodosBegin }) => {
 
 export default connect(
   null,
-  { fetchTodosBegin }
+  { addTodoBegin }
 )(TodoForm as FC);

@@ -7,6 +7,7 @@ export interface ITodoListConnectProps {
   visible: boolean;
   filter: Filter;
   isFetching: boolean;
+  error: any;
 }
 export interface ITodoListProps extends ITodoListConnectProps {
   fetchTodosBegin: (filter: Filter) => ITodosAction;

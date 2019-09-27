@@ -1,7 +1,5 @@
-import { TodoText, ITodosAction } from "redux/todos";
-import { AnyAction } from "redux";
+import { ITodosAction, TodoText } from "redux/todos";
 
 export interface ITodoFormProps {
-  addTodo: (text: TodoText) => ITodosAction;
-  fetchTodosBegin: () => AnyAction;
+  addTodoBegin: (text: TodoText) => ITodosAction;
 }

@@ -6,6 +6,12 @@ import {
 } from "./";
 import { AnyAction } from "redux";
 import { Filter } from "components/FilterLink";
+import { ITodosErrorPayload } from "./types/todos.interface";
+import {
+  TodoId,
+  TodoText,
+  NormalizedByIdTodoDictionary
+} from "./types/todos.type";
 
 export const showTodos = (): AnyAction => ({
   type: TodoActionType.showTodos
@@ -28,7 +34,28 @@ export const fetchTodosSuccess = (
   filter: payload.filter
 });
 
+export const fetchTodosFailure = (payload: ITodosErrorPayload) => ({
+  type: TodoActionType.fetchTodosFailure,
+  error: payload.error,
+  filter: payload.filter
+});
+
 export const handleTodosFilter = (filter: Filter): ITodosAction => ({
   type: TodoActionType.handleTodosFilter,
   filter
+});
+
+export const addTodoBegin = (text: TodoText): AnyAction => ({
+  type: TodoActionType.addTodoBegin,
+  text
+});
+
+export const addTodoSuccess = (response: NormalizedByIdTodoDictionary) => ({
+  type: TodoActionType.addTodoSuccess,
+  response
+});
+
+export const toggleTodo = (id: TodoId): AnyAction => ({
+  type: TodoActionType.toggleTodo,
+  id
 });

@@ -6,7 +6,8 @@ import {
   selectVisibleTodos,
   selectTodoFilter,
   fetchTodosBegin,
-  selectIsFetching
+  selectIsFetching,
+  selectError
 } from "redux/todos";
 import Todo from "../Todo/Todo";
 import {
@@ -16,7 +17,7 @@ import {
 import { IRootReducerState } from "redux/root-reducer";
 import { TodoListContainer } from "./TodoList.styles";
 import { createStructuredSelector } from "reselect";
-import { DEFAULT_ANIMATION_DURATION } from "utils/style-utils";
+import { DEFAULT_ANIMATION_DURATION, BUTTON_CLASS } from "utils/style-utils";
 import Spinner from "components/Spinner/Spinner";
 
 const TodoList: FC<ITodoListProps> = ({
@@ -24,20 +25,16 @@ const TodoList: FC<ITodoListProps> = ({
   isFetching,
   todos,
   filter,
-  fetchTodosBegin
+  fetchTodosBegin,
+  error
 }) => {
   const [on, toggle] = useState(false);
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (!isFetching && !todos.length) {
+    if (!error && !isFetching && !todos.length) {
       fetchTodosBegin(filter);
-      setLoading(true);
     }
-  }, [fetchTodosBegin, filter, todos]);
+  }, [fetchTodosBegin, isFetching, filter, error, todos]);
 
-  useEffect(() => {
-    setLoading(!todos.length);
-  }, [todos]);
   useEffect(() => {
     toggle(visible);
   }, [visible]);
@@ -54,7 +51,20 @@ const TodoList: FC<ITodoListProps> = ({
     }
   });
   // computer is slow, but make this a HOC e.g. `WithSpinner`
-  if (loading) return <Spinner />;
+  if (isFetching) return <Spinner />;
+  if (error) {
+    return (
+      <div>
+        <p>Could not fetch todos</p>
+        <button
+          className={BUTTON_CLASS}
+          onClick={() => fetchTodosBegin(filter)}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
   return (
     <TodoListContainer>
       {trail.map((animation, i) => (
@@ -70,7 +80,8 @@ const connectProps = {
   todos: selectVisibleTodos,
   visible: selectTodosVisible,
   filter: selectTodoFilter,
-  isFetching: selectIsFetching
+  isFetching: selectIsFetching,
+  error: selectError
 };
 const mapStateToProps = createStructuredSelector<
   IRootReducerState,

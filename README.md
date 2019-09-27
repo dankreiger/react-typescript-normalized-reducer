@@ -12,4 +12,8 @@
 - create `WithSpinner` hoc for async loading components
 - apply error boundaries
 - get a faster computer one day because typescript compiler is heavy
-- make ajax abortable (can be easily done via implicit cancellation `switchmap` or explicit cancellation `takeUntil`/observable unsubscribe in rxjs i.e. `redux-observable`, but find a saga solution for this example)
+- make ajax abortable
+  - implicit cancellation can be done with rxjs `switchMap` (redux-observable) / explicitly with `takeUntil(action)`
+  - can be done with axios cancel token
+  - can be done with fetch API `AbortController`, but cross-browser support isn't great
+  - can be done with XMLHttpRequest `abort()`- https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/abort

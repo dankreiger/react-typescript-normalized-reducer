@@ -47,3 +47,9 @@ export const selectIsFetching = createSelector(
   (state: ITodosState, filter: Filter) =>
     fromList.getIsFetching(state.listByFilter[filter])
 );
+
+export const selectError = createSelector(
+  [selectTodosReducer, selectTodoFilter],
+  (state: ITodosState, filter: Filter) =>
+    fromList.getError(state.listByFilter[filter])
+);

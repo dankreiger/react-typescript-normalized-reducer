@@ -6,4 +6,5 @@ export interface IFilterLinkProps {
   handleTodosFilter: (filter: Filter) => ITodosAction;
   children: string;
   activeFilter: Filter;
+  error: any;
 }

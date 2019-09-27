@@ -1,10 +1,11 @@
 import { TodoId, TodoText } from "..";
 import { Filter } from "components/FilterLink";
 import { ETodosActionTypes } from "./todos.enum";
+import { NormalizedByIdTodoListDictionary } from "./todos.type";
 
 // experimenting with non-nested data
 export interface ITodosState {
-  byId: ITodoDictionary;
+  byId: IByIdTodoDictionary;
   listByFilter: ITodosListByFilterState;
   visible: boolean;
 }
@@ -16,6 +17,7 @@ export interface ITodosListByFilterState {
 export interface ITodosIdList {
   ids: TodoId[];
   isFetching: boolean;
+  error: any;
 }
 
 export interface ITodo {
@@ -24,7 +26,7 @@ export interface ITodo {
   completed?: boolean;
 }
 
-export interface ITodoDictionary {
+export interface IByIdTodoDictionary {
   [id: string]: ITodo;
 }
 
@@ -33,10 +35,15 @@ export interface ITodosAction {
   filter: Filter;
 }
 export interface ITodosResponseAction extends ITodosAction {
-  response: ITodo[];
+  response: NormalizedByIdTodoListDictionary;
 }
 
 export interface ITodosSuccessPayload {
-  response: ITodo[];
+  response: NormalizedByIdTodoListDictionary;
+  filter: Filter;
+}
+
+export interface ITodosErrorPayload {
+  error: any;
   filter: Filter;
 }

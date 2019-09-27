@@ -1,9 +1,9 @@
-import { ITodo, TodoId, ITodosAction } from "redux/todos";
+import { ITodo, TodoId } from "redux/todos";
+import { AnyAction } from "redux";
 
 export interface ITodoProps {
   todo: ITodo;
-
-  //toggleTodo: (id: TodoId) => ITodosAction;
+  toggleTodo: (id: TodoId) => AnyAction;
 }
 
 export interface ITodoItemProps {

@@ -1,26 +1,19 @@
-import {
-  TodoId,
-  ITodoDictionary,
-  ETodosActionTypes as TodoActionType,
-  ITodosResponseAction
-} from "../";
+import { TodoId, IByIdTodoDictionary } from "../";
+import { AnyAction } from "redux";
 
 const byId = (
-  state: ITodoDictionary = {},
-  action: ITodosResponseAction
-): ITodoDictionary => {
-  switch (action.type) {
-    case TodoActionType.fetchTodosSuccess:
-      const nextState = { ...state };
-      action.response.forEach(todo => {
-        nextState[todo.id] = todo;
-      });
-      return nextState;
-    default:
-      return state;
+  state: IByIdTodoDictionary = {},
+  action: AnyAction
+): IByIdTodoDictionary => {
+  if (action.response) {
+    return {
+      ...state,
+      ...action.response.entities.todos
+    };
   }
+  return state;
 };
 
 export default byId;
 
-export const getTodo = (state: ITodoDictionary, id: TodoId) => state[id];
+export const getTodo = (state: IByIdTodoDictionary, id: TodoId) => state[id];
