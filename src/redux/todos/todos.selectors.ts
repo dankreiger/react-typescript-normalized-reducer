@@ -4,13 +4,22 @@ import { IRootReducerState } from "redux/root-reducer";
 import { Filter, EFilter } from "components/FilterLink";
 import * as fromById from "./reducers/byId.reducer";
 import * as fromList from "./reducers/createList.reducer";
+import { IByIdTodoDictionary } from "./types/todos.interface";
 
 const selectTodosReducer = (state: IRootReducerState) => state.todos;
 const selectRouter = (state: IRootReducerState) => state.router;
 
+export const selectIsFetchingByFilter = (state: ITodosState, filter: Filter) =>
+  state.listByFilter[filter].isFetching;
+
 export const selectTodosVisible = createSelector(
   [selectTodosReducer],
   ({ visible }): boolean => visible
+);
+
+export const selectByIdTodoDictionary = createSelector(
+  [selectTodosReducer],
+  ({ byId }): IByIdTodoDictionary => byId
 );
 
 export const selectTodoFilter = createSelector(
@@ -25,7 +34,7 @@ export const selectTodoFilter = createSelector(
 );
 
 // seems simpler
-// export const selectVisibleTodos = createSelector(
+// export const selectFilteredTodos = createSelector(
 //   [selectTodosReducer, selectTodoFilter],
 //   (state: ITodosState, filter: Filter) => {
 //     const ids = state.listByFilter[filter];
@@ -33,7 +42,7 @@ export const selectTodoFilter = createSelector(
 //   }
 // );
 
-export const selectVisibleTodos = createSelector(
+export const selectFilteredTodos = createSelector(
   [selectTodosReducer, selectTodoFilter],
 
   (state: ITodosState, filter: Filter) => {

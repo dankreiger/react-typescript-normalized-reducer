@@ -55,7 +55,14 @@ export const addTodoSuccess = (response: NormalizedByIdTodoDictionary) => ({
   response
 });
 
-export const toggleTodo = (id: TodoId): AnyAction => ({
-  type: TodoActionType.toggleTodo,
+export const toggleTodoBegin = (id: TodoId): AnyAction => ({
+  type: TodoActionType.toggleTodoBegin,
   id
+});
+
+export const toggleTodoSuccess = (
+  response: NormalizedByIdTodoDictionary
+): AnyAction => ({
+  type: TodoActionType.toggleTodoSuccess,
+  response
 });

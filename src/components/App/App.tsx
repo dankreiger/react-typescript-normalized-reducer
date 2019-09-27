@@ -9,6 +9,7 @@ export const App: FC = (): JSX.Element => {
     <>
       <TodoForm />
       <TodoFilters />
+      <h5>Note: changes do not persist on live url</h5>
       <p>Try a different animation spring, this one is slow - but not now</p>
       <Route exact path="/:filter?" component={TodoList} />
     </>

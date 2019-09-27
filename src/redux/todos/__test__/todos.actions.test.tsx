@@ -1,4 +1,4 @@
-import { addTodo, toggleTodo } from "../todos.actions";
+import { addTodo, toggleTodoBegin } from "../todos.actions";
 import { ETodosActionTypes } from "../types/todos.enum";
 import uuidv1 from "uuid/v1";
 
@@ -20,10 +20,10 @@ describe("todos actions", () => {
     });
   });
 
-  describe("toggleTodo", () => {
-    const action = toggleTodo(mockId);
+  describe("toggleTodoBegin", () => {
+    const action = toggleTodoBegin(mockId);
     it("has the correct type", () => {
-      expect(action.type).toEqual(ETodosActionTypes.toggleTodo);
+      expect(action.type).toEqual(ETodosActionTypes.toggleTodoBegin);
     });
 
     it("has the correct id", () => {

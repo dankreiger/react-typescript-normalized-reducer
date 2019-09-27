@@ -3,7 +3,7 @@ import { AnyAction } from "redux";
 
 export interface ITodoProps {
   todo: ITodo;
-  toggleTodo: (id: TodoId) => AnyAction;
+  toggleTodoBegin: (id: TodoId) => AnyAction;
 }
 
 export interface ITodoItemProps {

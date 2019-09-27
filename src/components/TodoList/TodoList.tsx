@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { animated, useTrail } from "react-spring";
 import {
   selectTodosVisible,
-  selectVisibleTodos,
+  selectFilteredTodos,
   selectTodoFilter,
   fetchTodosBegin,
   selectIsFetching,
@@ -29,11 +29,11 @@ const TodoList: FC<ITodoListProps> = ({
   error
 }) => {
   const [on, toggle] = useState(false);
-  useEffect(() => {
-    if (!error && !isFetching && !todos.length) {
-      fetchTodosBegin(filter);
-    }
-  }, [fetchTodosBegin, isFetching, filter, error, todos]);
+  // useEffect(() => {
+  //   if (!error && !isFetching && !todos.length) {
+  //     fetchTodosBegin(filter);
+  //   }
+  // }, [fetchTodosBegin, isFetching, filter, error, todos]);
 
   useEffect(() => {
     toggle(visible);
@@ -68,7 +68,7 @@ const TodoList: FC<ITodoListProps> = ({
   return (
     <TodoListContainer>
       {trail.map((animation, i) => (
-        <animated.div className="card" key={i} style={animation}>
+        <animated.div key={i} style={animation}>
           <Todo key={todos[i].id} todo={todos[i]} />
         </animated.div>
       ))}
@@ -77,7 +77,7 @@ const TodoList: FC<ITodoListProps> = ({
 };
 
 const connectProps = {
-  todos: selectVisibleTodos,
+  todos: selectFilteredTodos,
   visible: selectTodosVisible,
   filter: selectTodoFilter,
   isFetching: selectIsFetching,

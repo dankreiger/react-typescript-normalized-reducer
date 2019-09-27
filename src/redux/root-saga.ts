@@ -2,7 +2,9 @@ import { all, takeEvery, call, select } from "redux-saga/effects";
 import {
   watchFetchTodosBegin,
   watchRouteChange,
-  watchAddTodoBegin
+  watchAddTodoBegin,
+  watchToggleTodoBegin,
+  watchTodoFilter
 } from "./todos/todos.sagas";
 
 export function* watchAndLog() {
@@ -18,6 +20,8 @@ export default function* rootSaga() {
   yield all([
     call(watchRouteChange),
     call(watchFetchTodosBegin),
-    call(watchAddTodoBegin)
+    call(watchAddTodoBegin),
+    call(watchToggleTodoBegin),
+    call(watchTodoFilter)
   ]);
 }

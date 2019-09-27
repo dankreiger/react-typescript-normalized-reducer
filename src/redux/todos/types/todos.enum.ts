@@ -8,5 +8,6 @@ export enum ETodosActionTypes {
   addTodoBegin = "[Todos] ADD_TODO_BEGIN",
   addTodoSuccess = "[Todos] ADD_TODO_SUCCESS",
   addTodoFailure = "[Todos] ADD_TODO_FAILURE",
-  toggleTodo = "[Todos] TOGGLE_TODO"
+  toggleTodoBegin = "[Todos] TOGGLE_TODO_BEGIN",
+  toggleTodoSuccess = "[Todos] TOGGLE_TODO_SUCCESS"
 }

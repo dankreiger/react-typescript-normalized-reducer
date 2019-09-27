@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/extend-expect";
 
 const mockProps = {
   addTodo: jest.fn(),
-  toggleTodo: jest.fn(),
+  toggleTodoBegin: jest.fn(),
   todos: [],
   visibilityFilter: "all"
 };

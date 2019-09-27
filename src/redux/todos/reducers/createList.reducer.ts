@@ -4,6 +4,15 @@ import { AnyAction, combineReducers } from "redux";
 import { ITodosIdList } from "../types/todos.interface";
 
 const createList = (filter: Filter) => {
+  const handleToggle = (state: TodoId[], action: AnyAction) => {
+    const { result: toggledId, entities } = action.response;
+    const { completed } = entities.todos[toggledId];
+    const shouldRemove =
+      (completed && filter === EFilter.ACTIVE) ||
+      (!completed && filter === EFilter.COMPLETED);
+    return shouldRemove ? state.filter(id => id !== toggledId) : state;
+  };
+
   const ids = (state: TodoId[] = [], action: AnyAction) => {
     switch (action.type) {
       case TodoActionType.fetchTodosSuccess:
@@ -12,6 +21,8 @@ const createList = (filter: Filter) => {
         return filter !== EFilter.COMPLETED
           ? [...state, action.response.result]
           : state;
+      case TodoActionType.toggleTodoSuccess:
+        return handleToggle(state, action);
       default:
         return state;
     }

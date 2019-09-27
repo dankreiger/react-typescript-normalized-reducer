@@ -24,7 +24,6 @@ if (process.env.NODE_ENV === "development") {
 } else {
   composedEnhancers = compose(applyMiddleware(...middleware));
 }
-
 // const persistedState = undefined;
 const store = createStore(
   rootReducer(history),

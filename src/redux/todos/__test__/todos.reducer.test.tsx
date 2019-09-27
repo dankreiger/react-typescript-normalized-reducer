@@ -3,7 +3,7 @@ import {
   todos,
   todosReducerInitialState,
   addTodo,
-  toggleTodo,
+  toggleTodoBegin,
   TodoInitialState,
   ITodo
 } from "../";
@@ -28,13 +28,13 @@ describe("todos reducer", () => {
     expect(todos(stateBefore, action)).toEqual(stateAfter);
   });
 
-  test("toggleTodo", () => {
+  test("toggleTodoBegin", () => {
     const stateBefore: ITodo[] = [
       ...initialState,
       { id: "0", text: "Some todo", completed: false },
       { id: "1", text: "Another todo", completed: false }
     ];
-    const action = toggleTodo("1");
+    const action = toggleTodoBegin("1");
 
     const stateAfter: ITodo[] = [
       { id: "0", text: "Some todo", completed: false },
