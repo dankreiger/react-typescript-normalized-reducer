@@ -78,7 +78,7 @@ export function* handleFetchTodosBeginAsync() {
     return;
   } finally {
     if (cancelled()) {
-      source.cancel();
+      source.cancel(); // looks nice, but it doesn't work
     }
   }
 
